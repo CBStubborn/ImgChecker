@@ -1,0 +1,45 @@
+group 'ImgChecker'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE"
+    }
+}
+
+apply plugin: 'war'
+apply plugin: 'spring-boot'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.5'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            "org.springframework.boot:spring-boot-starter-web:1.3.3.RELEASE",
+            "org.springframework.boot:spring-boot-starter-security:1.3.3.RELEASE",
+            "org.springframework.boot:spring-boot-starter-data-jpa:1.3.3.RELEASE",
+            "mysql:mysql-connector-java:5.1.38",
+            'org.springframework.security:spring-security-taglibs:3.2.5.RELEASE',
+            'org.springframework.security:spring-security-cas:4.0.3.RELEASE',
+            'javax.servlet:jstl:1.2',
+            'com.google.code.gson:gson:2.5',
+    )
+
+    providedRuntime(
+            "org.springframework.boot:spring-boot-starter-tomcat:1.3.3.RELEASE",
+            'org.apache.tomcat.embed:tomcat-embed-jasper:8.0.30'
+    )
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
